@@ -57,23 +57,24 @@ export const Navbar = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-200 ${
-        scrolled ? 'nav-clean py-3.5 shadow-subtle' : 'bg-surface-white/90 backdrop-blur-md py-4 border-b border-surface-border'
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+        scrolled ? 'nav-studio py-3 shadow-sm' : 'bg-white/90 backdrop-blur-md py-4 border-b border-slate-200'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Brand Logo */}
+          {/* Brand Logo with Studio Dot */}
           <a
             href="#home"
             onClick={(e) => handleNavClick(e, '#home')}
-            className="text-base font-semibold tracking-tight text-primary hover:text-black transition-colors"
+            className="flex items-center space-x-2 text-base font-black tracking-tight text-slate-900 group"
           >
-            {personal.navBrand}
+            <span className="w-2.5 h-2.5 rounded-full bg-blue-600 group-hover:scale-125 transition-transform" />
+            <span>{personal.navBrand}</span>
           </a>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center space-x-1">
+          {/* Desktop Navigation Links with active pill */}
+          <nav className="hidden lg:flex items-center space-x-1 border border-slate-200 bg-slate-50/80 rounded-full px-3 py-1 shadow-xs">
             {NAV_ITEMS.map((item) => {
               const isActive = activeSection === item.href.substring(1);
               return (
@@ -81,14 +82,13 @@ export const Navbar = () => {
                   key={item.label}
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className={`px-3 py-1.5 text-xs font-medium tracking-wide transition-colors relative ${
-                    isActive ? 'text-primary' : 'text-muted hover:text-primary'
+                  className={`px-3.5 py-1 text-xs font-semibold tracking-wide rounded-full transition-all ${
+                    isActive
+                      ? 'bg-white text-blue-600 shadow-xs'
+                      : 'text-slate-600 hover:text-slate-900'
                   }`}
                 >
                   {item.label}
-                  {isActive && (
-                    <span className="absolute bottom-0 left-3 right-3 h-[2px] bg-primary rounded-full" />
-                  )}
                 </a>
               );
             })}
@@ -99,7 +99,7 @@ export const Navbar = () => {
             <a
               href={personal.resumePath}
               download="P_Karthik_Rao_Resume.pdf"
-              className="inline-flex items-center space-x-2 px-4 py-2 text-xs font-medium text-surface-white bg-primary hover:bg-black rounded-lg transition-colors active:scale-95 shadow-sm"
+              className="inline-flex items-center space-x-2 px-4 py-2 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm hover:shadow-blue-500/20 transition-all active:scale-95"
             >
               <span>Download Resume</span>
               <Download className="w-3.5 h-3.5" />
@@ -111,7 +111,7 @@ export const Navbar = () => {
             <a
               href={personal.resumePath}
               download="P_Karthik_Rao_Resume.pdf"
-              className="p-2 text-primary border border-surface-border rounded-lg bg-surface-white"
+              className="p-2 text-blue-600 border border-slate-200 rounded-lg bg-white"
               aria-label="Download Resume"
             >
               <Download className="w-4 h-4" />
@@ -120,7 +120,7 @@ export const Navbar = () => {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-primary border border-surface-border rounded-lg bg-surface-white hover:bg-surface-section transition-colors"
+              className="p-2 text-slate-700 border border-slate-200 rounded-lg bg-white hover:bg-slate-50 transition-colors"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -131,7 +131,7 @@ export const Navbar = () => {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-surface-white border-b border-surface-border px-6 py-4 shadow-elevated animate-in fade-in slide-in-from-top-2 duration-150">
+        <div className="lg:hidden bg-white border-b border-slate-200 px-6 py-4 shadow-xl">
           <div className="flex flex-col space-y-1">
             {NAV_ITEMS.map((item) => {
               const isActive = activeSection === item.href.substring(1);
@@ -140,8 +140,8 @@ export const Navbar = () => {
                   key={item.label}
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className={`px-3 py-2.5 rounded-md text-sm font-medium transition-colors ${
-                    isActive ? 'bg-surface-section text-primary font-semibold' : 'text-body hover:bg-surface-alt hover:text-primary'
+                  className={`px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors ${
+                    isActive ? 'bg-blue-50 text-blue-600' : 'text-slate-700 hover:bg-slate-50'
                   }`}
                 >
                   {item.label}
@@ -150,11 +150,11 @@ export const Navbar = () => {
             })}
           </div>
 
-          <div className="pt-4 mt-3 border-t border-surface-border">
+          <div className="pt-4 mt-3 border-t border-slate-100">
             <a
               href={personal.resumePath}
               download="P_Karthik_Rao_Resume.pdf"
-              className="flex items-center justify-center space-x-2 w-full py-2.5 text-xs font-semibold uppercase tracking-wider text-surface-white bg-primary hover:bg-black rounded-lg"
+              className="flex items-center justify-center space-x-2 w-full py-2.5 text-xs font-bold uppercase tracking-wider text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm"
             >
               <Download className="w-4 h-4" />
               <span>Download Resume</span>
