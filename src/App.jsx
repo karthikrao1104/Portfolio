@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
@@ -10,27 +10,20 @@ import { Certifications } from './components/Certifications';
 import { Achievements } from './components/Achievements';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
-import { CursorSpotlight } from './components/CursorSpotlight';
-import { ScrollProgressBar } from './components/ScrollProgressBar';
-import { LoadingScreen } from './components/LoadingScreen';
+import { ScrollProgress } from './components/ScrollProgress';
+import { BackToTop } from './components/BackToTop';
 
 function App() {
-  const [siteLoaded, setSiteLoaded] = useState(false);
-
   return (
-    <div className="min-h-screen bg-[#050505] text-white selection:bg-white/20 selection:text-white relative">
-      {/* Loading Screen */}
-      <LoadingScreen onFinish={() => setSiteLoaded(true)} />
+    <div className="min-h-screen bg-surface-white text-body selection:bg-primary selection:text-surface-white relative font-sans antialiased">
+      {/* Top Reading Progress */}
+      <ScrollProgress />
 
-      {/* Desktop Spotlight & Scroll Progress */}
-      <CursorSpotlight />
-      <ScrollProgressBar />
-
-      {/* Sticky Apple-styled Glass Navigation */}
+      {/* Clean Sticky Navigation Bar */}
       <Navbar />
 
-      {/* Main Content Sections */}
-      <main className="relative">
+      {/* Main Portfolio Sections */}
+      <main>
         <Hero />
         <About />
         <Skills />
@@ -42,8 +35,11 @@ function App() {
         <Contact />
       </main>
 
-      {/* Footer */}
+      {/* Minimal Clean Footer */}
       <Footer />
+
+      {/* Quick Scroll Back To Top Button */}
+      <BackToTop />
     </div>
   );
 }

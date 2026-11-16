@@ -1,60 +1,52 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { Award, ExternalLink, ShieldCheck } from 'lucide-react';
-import { certificationsData } from '../data/portfolioData';
+import { certificationsList } from '../data/certifications';
 
 export const Certifications = () => {
   return (
-    <section id="certifications" className="py-28 px-4 sm:px-6 lg:px-8 bg-[#050505] relative border-t border-white/[0.05]">
-      <div className="max-w-7xl mx-auto">
+    <section id="certifications" className="py-24 bg-surface-white border-b border-surface-border">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="mb-16">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-white/10 bg-white/[0.02] text-xs font-mono uppercase tracking-[0.2em] text-[#A1A1A6] mb-3">
-            <span>CERTIFICATIONS</span>
+        <div className="mb-14">
+          <div className="text-xs font-mono font-medium tracking-wider text-eyebrow uppercase mb-2">
+            06 — CERTIFICATIONS
           </div>
-          <h2 className="text-3xl sm:text-5xl font-light tracking-tight text-white mb-2">
-            Industry validated credentials.
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-primary mb-3">
+            Professional certifications and learning.
           </h2>
-          <p className="text-sm font-mono text-[#8E8E93] uppercase tracking-wider">
-            Oracle Cloud Infrastructure, SQL Specialist, Google Cloud &amp; Deloitte
+          <p className="text-base text-muted max-w-2xl">
+            Industry-validated credentials from Oracle Cloud Infrastructure, Google Cloud, and Deloitte.
           </p>
         </div>
 
-        {/* Certifications Grid */}
+        {/* 6-Card Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {certificationsData.map((cert, idx) => (
-            <motion.div
+          {certificationsList.map((cert, idx) => (
+            <div
               key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.08 }}
-              className="glass-panel p-6 sm:p-7 rounded-2xl border border-white/[0.08] hover:border-white/20 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden"
+              className="card-clean rounded-2xl p-6 sm:p-7 bg-surface-white flex flex-col justify-between"
             >
-              {/* Silver top accent line on hover */}
-              <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <div className="p-2.5 rounded-xl bg-white/[0.04] border border-white/10 text-white group-hover:bg-white/[0.08] transition-colors">
+                  <div className="p-2.5 rounded-lg bg-surface-section border border-surface-border text-primary">
                     <ShieldCheck className="w-5 h-5" />
                   </div>
-                  <span className="text-[10px] font-mono tracking-widest text-[#8E8E93] px-2 py-0.5 rounded bg-white/5 border border-white/5">
+                  <span className="text-xs font-mono font-medium px-2.5 py-0.5 rounded bg-surface-section border border-surface-border text-eyebrow">
                     {cert.year}
                   </span>
                 </div>
 
-                <div className="text-[11px] font-mono uppercase tracking-wider text-neutral-400 mb-1.5">
+                <div className="text-xs font-mono font-semibold text-eyebrow uppercase mb-1">
                   {cert.issuer}
                 </div>
 
-                <h3 className="text-base font-medium text-white tracking-tight mb-4 group-hover:text-neutral-100 transition-colors leading-snug">
+                <h3 className="text-base font-bold text-primary mb-3 leading-snug">
                   {cert.name}
                 </h3>
               </div>
 
-              <div className="pt-4 border-t border-white/5 flex items-center justify-between">
-                <span className="text-[11px] font-mono text-[#8E8E93]">
+              <div className="pt-4 border-t border-surface-border flex items-center justify-between">
+                <span className="text-xs font-mono text-muted">
                   {cert.category}
                 </span>
 
@@ -62,13 +54,13 @@ export const Certifications = () => {
                   href={cert.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-1.5 text-xs font-mono text-neutral-300 hover:text-white transition-colors group-hover:translate-x-0.5"
+                  className="inline-flex items-center space-x-1 text-xs font-semibold text-primary hover:text-black transition-colors"
                 >
                   <span>View Credential</span>
                   <ExternalLink className="w-3.5 h-3.5" />
                 </a>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

@@ -1,44 +1,53 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { Sparkles, BarChart3, Database, Layers, CheckCircle2 } from 'lucide-react';
-import { personalData } from '../data/portfolioData';
+import React, { useState, useEffect, useRef } from 'react';
+import { CheckCircle2 } from 'lucide-react';
+import { personal } from '../data/personal';
 
-// Animated Counter Component
-const Counter = ({ target, decimals = 0, suffix = "" }) => {
-  const [count, setCount] = useState(0);
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
+const StatCounter = ({ target, decimals = 0, suffix = "" }) => {
+  const [val, setVal] = useState(0);
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const elementRef = useRef(null);
 
   useEffect(() => {
-    if (!isInView) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !hasAnimated) {
+          setHasAnimated(true);
 
-    let start = 0;
-    const duration = 1800; // 1.8 seconds
-    const frameRate = 1000 / 60;
-    const totalFrames = Math.round(duration / frameRate);
-    let frame = 0;
+          let start = 0;
+          const duration = 1500;
+          const frames = 60;
+          const step = duration / frames;
+          let currentFrame = 0;
 
-    const counter = setInterval(() => {
-      frame++;
-      const progress = frame / totalFrames;
-      // easeOutExpo
-      const easeVal = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-      const current = start + (target - start) * easeVal;
-      
-      setCount(current);
+          const interval = setInterval(() => {
+            currentFrame++;
+            const progress = currentFrame / frames;
+            // standard ease-out
+            const ease = 1 - Math.pow(1 - progress, 3);
+            const currentVal = start + (target - start) * ease;
 
-      if (frame >= totalFrames) {
-        clearInterval(counter);
-        setCount(target);
-      }
-    }, frameRate);
+            setVal(currentVal);
 
-    return () => clearInterval(counter);
-  }, [isInView, target]);
+            if (currentFrame >= frames) {
+              clearInterval(interval);
+              setVal(target);
+            }
+          }, step);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [hasAnimated, target]);
 
   return (
-    <span ref={ref} className="font-light tracking-tight">
-      {decimals > 0 ? count.toFixed(decimals) : Math.floor(count).toLocaleString()}
+    <span ref={elementRef} className="font-bold text-primary tracking-tight">
+      {decimals > 0 ? val.toFixed(decimals) : Math.floor(val).toLocaleString()}
       {suffix}
     </span>
   );
@@ -46,78 +55,67 @@ const Counter = ({ target, decimals = 0, suffix = "" }) => {
 
 export const About = () => {
   return (
-    <section id="about" className="py-28 px-4 sm:px-6 lg:px-8 bg-[#050505] relative border-t border-white/[0.05]">
-      {/* Background soft glow */}
-      <div className="absolute top-1/2 left-0 w-96 h-96 bg-white/[0.02] rounded-full blur-3xl pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto">
+    <section id="about" className="py-24 bg-surface-section border-b border-surface-border">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="mb-16">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-white/10 bg-white/[0.02] text-xs font-mono uppercase tracking-[0.2em] text-[#A1A1A6] mb-3">
-            <span>ABOUT ME</span>
+        <div className="mb-14">
+          <div className="text-xs font-mono font-medium tracking-wider text-eyebrow uppercase mb-2">
+            01 — ABOUT ME
           </div>
-          <h2 className="text-3xl sm:text-5xl font-light tracking-tight text-white mb-2">
-            Curiosity meets technology.
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-primary mb-3">
+            A little about my journey.
           </h2>
-          <p className="text-sm font-mono text-[#8E8E93] uppercase tracking-wider">
-            Verified Professional Foundations &amp; Background
+          <p className="text-base text-muted max-w-2xl">
+            Passionate about transforming data into insights and developing practical software applications.
           </p>
         </div>
 
-        {/* Two-Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          {/* Left Column: Narrative Introduction */}
-          <div className="lg:col-span-7 flex flex-col space-y-6">
-            <div className="glass-panel p-8 sm:p-10 rounded-2xl border border-white/[0.08] relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-white/[0.04] to-transparent pointer-events-none" />
-              
-              <div className="space-y-5 text-neutral-300 text-base sm:text-lg font-light leading-relaxed">
-                {personalData.aboutParagraphs.map((para, idx) => (
-                  <p key={idx} className="last:text-white/90">
-                    {para}
-                  </p>
-                ))}
-              </div>
+        {/* Two-Column Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+          {/* Left: Professional Story Card */}
+          <div className="lg:col-span-7 card-clean rounded-2xl p-8 sm:p-10 bg-surface-white">
+            <div className="space-y-4 text-body text-base leading-relaxed">
+              {personal.aboutDetailed.map((paragraph, idx) => (
+                <p key={idx} className={idx === 0 ? "text-primary font-medium" : ""}>
+                  {paragraph}
+                </p>
+              ))}
+            </div>
 
-              {/* Verified Competency Checkmarks */}
-              <div className="mt-8 pt-8 border-t border-white/10 grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs font-mono text-[#A1A1A6]">
-                <div className="flex items-center space-x-2">
-                  <CheckCircle2 className="w-4 h-4 text-neutral-300" />
-                  <span>Large-Scale SQL Analysis</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <CheckCircle2 className="w-4 h-4 text-neutral-300" />
-                  <span>Interactive Power BI &amp; Tableau</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <CheckCircle2 className="w-4 h-4 text-neutral-300" />
-                  <span>ML &amp; Computer Vision (OpenCV)</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <CheckCircle2 className="w-4 h-4 text-neutral-300" />
-                  <span>Full-Stack Django &amp; React</span>
-                </div>
+            {/* Core Capability Checklist */}
+            <div className="mt-8 pt-8 border-t border-surface-border grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-mono text-body">
+              <div className="flex items-center space-x-2">
+                <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
+                <span>Large-Scale SQL Analysis</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
+                <span>Interactive Power BI &amp; Tableau</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
+                <span>Machine Learning &amp; Computer Vision</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
+                <span>Full-Stack Django &amp; React</span>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Verified Animated Statistics Cards */}
+          {/* Right: Verified Statistics Cards with Dark Readable Typography */}
           <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {personalData.statistics.map((stat, idx) => (
-              <motion.div
+            {personal.statistics.map((stat, idx) => (
+              <div
                 key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="glass-panel p-6 rounded-2xl border border-white/[0.08] hover:border-white/20 transition-all duration-300 flex flex-col justify-between group"
+                className="card-clean rounded-2xl p-6 bg-surface-white flex flex-col justify-between"
               >
                 <div>
-                  <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#8E8E93] mb-4">
+                  <div className="text-[11px] font-mono font-medium text-eyebrow uppercase tracking-wider mb-2">
                     Metric 0{idx + 1}
                   </div>
-                  <div className="text-3xl sm:text-4xl text-white font-light tracking-tight mb-2 group-hover:text-neutral-100 transition-colors">
-                    <Counter
+                  <div className="text-3xl sm:text-4xl mb-2 text-primary">
+                    <StatCounter
                       target={stat.value}
                       decimals={stat.decimals || 0}
                       suffix={stat.suffix}
@@ -125,15 +123,15 @@ export const About = () => {
                   </div>
                 </div>
 
-                <div>
-                  <div className="text-sm font-medium text-white/90 mb-1">
+                <div className="pt-3 border-t border-surface-border">
+                  <div className="text-sm font-semibold text-primary">
                     {stat.label}
                   </div>
-                  <div className="text-xs text-[#8E8E93] font-light">
-                    {stat.detail}
+                  <div className="text-xs text-muted mt-0.5">
+                    {stat.desc}
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
