@@ -1,7 +1,7 @@
 export const personal = {
   fullName: "P. Karthik Rao",
-  navBrand: "KARTHIK RAO.",
-  introEyebrow: "HELLO, I'M KARTHIK",
+  navBrand: "KARTHIK RAO",
+  introEyebrow: "HELLO, I'M ",
   headline: "Building Intelligent Solutions with Data, AI & Technology.",
   summaryShort: "AI and Data Science graduate passionate about Machine Learning, Data Analytics, and developing practical software applications.",
   aboutDetailed: [

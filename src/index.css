@@ -4,117 +4,92 @@
 
 @layer base {
   :root {
-    --bg-main: #FFFFFF;
-    --bg-secondary: #F8FAFC;
-    --bg-alt: #F1F5F9;
-    --accent-blue: #2563EB;
-    --accent-indigo: #4F46E5;
-    --accent-sky: #0284C7;
-    --text-heading: #0F172A;
-    --text-body: #334155;
-    --text-secondary: #64748B;
-    --border-color: #E2E8F0;
-  }
-
-  *, ::before, ::after {
-    border-color: #E2E8F0;
+    --bg-main: #FAFAFA;
+    --text-heading: #111111;
+    --text-body: #374151;
+    --text-secondary: #6B7280;
+    --border-color: #E5E7EB;
   }
 
   html {
     scroll-behavior: smooth;
-    background-color: #FFFFFF !important;
-    color: #0F172A !important;
+    background-color: #FAFAFA !important;
+    color: #111111 !important;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   body {
-    background-color: #FFFFFF !important;
-    color: #334155 !important;
+    background-color: #FAFAFA !important;
+    color: #374151 !important;
     overflow-x: hidden;
     margin: 0;
     padding: 0;
   }
 
   #root {
-    background-color: #FFFFFF !important;
-    color: #334155 !important;
+    background-color: #FAFAFA !important;
+    color: #374151 !important;
     min-height: 100vh;
   }
 
   ::selection {
-    background: #0F172A;
+    background: #111111;
     color: #FFFFFF;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    color: #0F172A;
+    color: #111111;
   }
 
   p {
-    color: #334155;
+    color: #374151;
   }
 }
 
-/* Background Grids & Ambient Glows */
-.bg-grid-slate {
-  background-image: radial-gradient(rgba(15, 23, 42, 0.06) 1px, transparent 1px);
-  background-size: 24px 24px;
+/* Crisp Apple Monochrome Cards */
+.card-box {
+  background: #FFFFFF !important;
+  border: 1px solid #E5E7EB !important;
+  border-radius: 1rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.02);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.bg-dot-slate {
-  background-image: radial-gradient(rgba(37, 99, 235, 0.08) 1.5px, transparent 1.5px);
-  background-size: 20px 20px;
-}
-
-/* Luxury Apple Light & Studio Cards */
-.card-premium {
-  background: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  position: relative;
-}
-
-.card-premium:hover {
-  border-color: #CBD5E1;
-  box-shadow: 0 12px 30px -4px rgba(15, 23, 42, 0.08), 0 4px 10px -2px rgba(15, 23, 42, 0.04);
+.card-box:hover {
+  border-color: #9CA3AF !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
   transform: translateY(-2px);
 }
 
-/* Glass Floating Navbar */
-.nav-studio {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+/* Framed Section Containers */
+.section-container {
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03);
 }
 
-/* Subtle Gradient Text */
-.gradient-title {
-  background: linear-gradient(135deg, #0F172A 0%, #1E293B 40%, #2563EB 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Modern Header Glass in Monochrome */
+.nav-glass {
+  background: rgba(250, 250, 250, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid #E5E7EB;
 }
 
-.gradient-accent {
-  background: linear-gradient(135deg, #2563EB 0%, #4F46E5 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Custom scrollbar */
+/* Custom scrollbar in Monochrome */
 ::-webkit-scrollbar {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #F8FAFC;
+  background: #FAFAFA;
 }
 ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
+  background: #D1D5DB;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94A3B8;
+  background: #9CA3AF;
 }
