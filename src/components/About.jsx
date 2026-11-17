@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { CheckCircle2 } from 'lucide-react';
-import { personal } from '../data/personal';
+import { personal } from '../data/portfolioData';
 
 const StatCounter = ({ target, decimals = 0, suffix = "" }) => {
   const [val, setVal] = useState(0);

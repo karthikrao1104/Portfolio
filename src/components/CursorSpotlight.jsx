@@ -33,7 +33,7 @@ export const CursorSpotlight = () => {
     <div
       className="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300"
       style={{
-        background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(255, 255, 255, 0.045), transparent 80%)`,
+        background: `radial-gradient(650px circle at ${position.x}px ${position.y}px, rgba(59, 130, 246, 0.05), transparent 80%)`,
       }}
       aria-hidden="true"
     />

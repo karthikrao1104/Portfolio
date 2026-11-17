@@ -1,6 +1,6 @@
 import React from 'react';
 import { Code2, Database, Brain, Library, Globe, Terminal } from 'lucide-react';
-import { skillCategories } from '../data/skills';
+import { skillCategories } from '../data/portfolioData';
 
 const CATEGORY_ICONS = {
   "programming": Code2,

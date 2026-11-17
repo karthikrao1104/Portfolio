@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Download } from 'lucide-react';
-import { personal } from '../data/personal';
+import { personal } from '../data/portfolioData';
 
 const NAV_ITEMS = [
   { label: 'Home', href: '#home' },
@@ -58,7 +58,7 @@ export const Navbar = () => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        scrolled ? 'nav-monochrome py-3 shadow-xs' : 'bg-white/90 backdrop-blur-md py-4'
+        scrolled ? 'nav-glass py-3 shadow-sm' : 'bg-white/80 backdrop-blur-md py-4'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

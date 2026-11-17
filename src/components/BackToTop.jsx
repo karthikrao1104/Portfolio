@@ -27,9 +27,9 @@ export const BackToTop = () => {
       type="button"
       onClick={scrollToTop}
       aria-label="Back to top"
-      className="fixed bottom-6 right-6 z-40 p-3 rounded-full bg-surface-white text-primary border border-surface-border shadow-elevated hover:bg-surface-section hover:border-surface-borderHover transition-all duration-200 active:scale-95"
+      className="fixed bottom-6 right-6 z-40 p-3 rounded-full bg-white text-neutral-800 border border-neutral-200 shadow-lg hover:bg-neutral-100 hover:border-neutral-300 transition-all duration-200 active:scale-95"
     >
-      <ArrowUp className="w-4 h-4 text-primary" />
+      <ArrowUp className="w-4 h-4 text-neutral-800" />
     </button>
   );
 };

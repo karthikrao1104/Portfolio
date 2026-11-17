@@ -1,5 +1,5 @@
 import React from 'react';
-import { verifiedMilestones } from '../data/certifications';
+import { verifiedMilestones } from '../data/portfolioData';
 
 export const Achievements = () => {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Calendar } from 'lucide-react';
-import { experiences } from '../data/experience';
+import { experiences } from '../data/portfolioData';
 
 export const Experience = () => {
   return (

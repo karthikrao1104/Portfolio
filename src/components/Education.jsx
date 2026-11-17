@@ -1,6 +1,6 @@
 import React from 'react';
 import { Calendar, GraduationCap, Award } from 'lucide-react';
-import { educationList } from '../data/certifications';
+import { educationList } from '../data/portfolioData';
 
 export const Education = () => {
   return (

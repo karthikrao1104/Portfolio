@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send, CheckCircle2, AlertCircle } from 'lucide-react';
 import { Icons } from './BrandIcons';
-import { personal } from '../data/personal';
+import { personal } from '../data/portfolioData';
 
 export const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     subject: '',
-    message: ''
+    message: '',
+    website: '' // honeypot field for bot spam protection
   });
 
   const [errors, setErrors] = useState({});
@@ -39,9 +40,12 @@ export const Contact = () => {
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: null }));
     }
+    if (status.error) {
+      setStatus((prev) => ({ ...prev, error: null }));
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
@@ -51,20 +55,41 @@ export const Contact = () => {
 
     setStatus({ submitting: true, submitted: false, error: null });
 
-    setTimeout(() => {
+    try {
+      const response = await fetch('/api/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || 'Failed to send message. Please try again.');
+      }
+
       setStatus({
         submitting: false,
         submitted: true,
-        error: null
+        error: null,
       });
 
       setFormData({
         name: '',
         email: '',
         subject: '',
-        message: ''
+        message: '',
+        website: '',
       });
-    }, 1000);
+    } catch (err) {
+      setStatus({
+        submitting: false,
+        submitted: false,
+        error: err.message || 'Something went wrong while sending your message. Please try again.',
+      });
+    }
   };
 
   return (
@@ -278,6 +303,28 @@ export const Contact = () => {
                       )}
                     </div>
 
+                    {/* Honeypot field (hidden from real users, traps spam bots) */}
+                    <div className="hidden" aria-hidden="true">
+                      <label htmlFor="website">Website</label>
+                      <input
+                        type="text"
+                        id="website"
+                        name="website"
+                        value={formData.website}
+                        onChange={handleChange}
+                        tabIndex={-1}
+                        autoComplete="off"
+                      />
+                    </div>
+
+                    {/* Server/API Error Notification */}
+                    {status.error && (
+                      <div className="p-3.5 rounded-lg bg-red-50 border border-red-200 text-red-700 text-xs sm:text-sm flex items-start space-x-2.5">
+                        <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+                        <span>{status.error}</span>
+                      </div>
+                    )}
+
                     {/* Submit Button */}
                     <div className="pt-2 flex items-center justify-between">
                       <button
@@ -286,7 +333,7 @@ export const Contact = () => {
                         className="inline-flex items-center space-x-2 px-6 py-3 rounded-lg text-xs sm:text-sm font-semibold tracking-wide text-white bg-neutral-900 hover:bg-neutral-800 transition-colors active:scale-95 disabled:opacity-50"
                       >
                         {status.submitting ? (
-                          <span>Sending Message...</span>
+                          <span>Sending...</span>
                         ) : (
                           <>
                             <span>Send Message</span>
@@ -296,7 +343,7 @@ export const Contact = () => {
                       </button>
 
                       <span className="text-xs font-mono text-neutral-400">
-                        Ready for EmailJS / SMTP
+                        Vercel Serverless • Resend API
                       </span>
                     </div>
                   </form>

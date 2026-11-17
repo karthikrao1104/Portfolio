@@ -1,6 +1,6 @@
 import React from 'react';
 import { Award, ExternalLink, ShieldCheck } from 'lucide-react';
-import { certificationsList } from '../data/certifications';
+import { certificationsList } from '../data/portfolioData';
 
 export const Certifications = () => {
   return (

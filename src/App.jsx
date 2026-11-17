@@ -12,10 +12,18 @@ import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { ScrollProgress } from './components/ScrollProgress';
 import { BackToTop } from './components/BackToTop';
+import { BackgroundUI } from './components/BackgroundUI';
+import { CursorSpotlight } from './components/CursorSpotlight';
 
 function App() {
   return (
-    <div className="min-h-screen bg-surface-white text-body selection:bg-primary selection:text-surface-white relative font-sans antialiased">
+    <div className="min-h-screen text-neutral-800 selection:bg-neutral-900 selection:text-white relative font-sans antialiased">
+      {/* Dynamic Ambient Background System */}
+      <BackgroundUI />
+
+      {/* Interactive Cursor Spotlight */}
+      <CursorSpotlight />
+
       {/* Top Reading Progress */}
       <ScrollProgress />
 
@@ -23,7 +31,7 @@ function App() {
       <Navbar />
 
       {/* Main Portfolio Sections */}
-      <main>
+      <main className="relative z-10">
         <Hero />
         <About />
         <Skills />
@@ -36,7 +44,9 @@ function App() {
       </main>
 
       {/* Minimal Clean Footer */}
-      <Footer />
+      <div className="relative z-10">
+        <Footer />
+      </div>
 
       {/* Quick Scroll Back To Top Button */}
       <BackToTop />

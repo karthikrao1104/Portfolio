@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArrowRight, Download, Mail, Database, Brain, Code2, ShieldCheck } from 'lucide-react';
 import { Icons } from './BrandIcons';
-import { personal } from '../data/personal';
+import { personal } from '../data/portfolioData';
 
 export const Hero = () => {
   const handleScrollTo = (id) => (e) => {
@@ -13,10 +13,7 @@ export const Hero = () => {
   };
 
   return (
-    <section id="home" className="relative pt-32 pb-20 md:pt-36 md:pb-24 bg-white overflow-hidden">
-      {/* Subtle Monochrome Tech Grid Background */}
-      <div className="absolute inset-0 bg-grid-monochrome [mask-image:radial-gradient(ellipse_at_center,white_40%,transparent_90%)] pointer-events-none" />
-
+    <section id="home" className="relative pt-32 pb-20 md:pt-36 md:pb-24 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           {/* Left Column: Core Positioning & CTAs */}
