@@ -194,7 +194,7 @@ export const Contact = () => {
                     <div className="p-4 rounded-full bg-neutral-100 border border-neutral-300 text-neutral-900">
                       <CheckCircle2 className="w-8 h-8" />
                     </div>
-                    <h3 className="text-xl font-bold text-neutral-900">Message Dispatched</h3>
+                    <h3 className="text-xl font-bold text-neutral-900">Message Sent</h3>
                     <p className="text-sm text-neutral-600 max-w-md">
                       Thank you for reaching out. You can also send a direct email to{' '}
                       <span className="font-semibold text-neutral-900">{personal.email}</span>.
@@ -220,7 +220,7 @@ export const Contact = () => {
                           name="name"
                           value={formData.name}
                           onChange={handleChange}
-                          placeholder="e.g. Sarah Jenkins"
+                          placeholder="Enter your Name"
                           className={`w-full px-4 py-2.5 rounded-lg bg-white border ${
                             errors.name ? 'border-red-500' : 'border-neutral-200 focus:border-neutral-900'
                           } text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none transition-colors`}
@@ -243,7 +243,7 @@ export const Contact = () => {
                           name="email"
                           value={formData.email}
                           onChange={handleChange}
-                          placeholder="e.g. sarah@company.com"
+                          placeholder="Enter Your Email"
                           className={`w-full px-4 py-2.5 rounded-lg bg-white border ${
                             errors.email ? 'border-red-500' : 'border-neutral-200 focus:border-neutral-900'
                           } text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none transition-colors`}
@@ -267,7 +267,7 @@ export const Contact = () => {
                         name="subject"
                         value={formData.subject}
                         onChange={handleChange}
-                        placeholder="Opportunity / Project Discussion / Collaboration"
+                        placeholder="What would you like to discuss?"
                         className={`w-full px-4 py-2.5 rounded-lg bg-white border ${
                           errors.subject ? 'border-red-500' : 'border-neutral-200 focus:border-neutral-900'
                         } text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none transition-colors`}
@@ -290,7 +290,7 @@ export const Contact = () => {
                         rows={5}
                         value={formData.message}
                         onChange={handleChange}
-                        placeholder="Please share details about the role, project, or topic..."
+                        placeholder="Tell me more about it."
                         className={`w-full px-4 py-2.5 rounded-lg bg-white border ${
                           errors.message ? 'border-red-500' : 'border-neutral-200 focus:border-neutral-900'
                         } text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none transition-colors resize-none`}
@@ -342,9 +342,7 @@ export const Contact = () => {
                         )}
                       </button>
 
-                      <span className="text-xs font-mono text-neutral-400">
-                        Vercel Serverless • Resend API
-                      </span>
+                      
                     </div>
                   </form>
                 )}
